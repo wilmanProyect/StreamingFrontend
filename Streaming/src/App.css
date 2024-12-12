@@ -1,0 +1,56 @@
+#root {
+  max-width: 1200px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+/* *{
+  border: 1px solid red;
+  
+} */
+.background{
+  background-image: url(../src/img/Imagen\ de\ WhatsApp\ 2024-12-11\ a\ las\ 19.25.45_097e3d42.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 25px;
+  width: 1200px;
+  height: 509px;
+}
+.formulario{
+  width: 500px ;
+  padding: 20px;
+  margin-left: 350px;
+  background-color: rgb(12, 12, 12, 0.7);
+  border-radius: 15px;
+  text-align: left;
+}
+p, label{
+  color: white;
+}
+input{
+  width: 98%;
+  margin-bottom:15px ;
+  padding: 5px;
+}
+button{
+  width: 97%;
+  color: chocolate;
+  margin: 15px;
+}
+button:hover{
+  background-color:chocolate ;
+  color: white;
+}
+.buttonR{
+  display: flex;
+  flex-direction:row;
+}
+.buttonR , button{
+  width: 97%;
+}
+h2{
+  color:white;
+  font-size: 3rem;
+}
