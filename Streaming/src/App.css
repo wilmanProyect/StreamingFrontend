@@ -10,9 +10,10 @@
   
 } */
 .background{
-  background-image: url(../src/img/Imagen\ de\ WhatsApp\ 2024-12-11\ a\ las\ 19.25.45_097e3d42.jpg);
+  background-image: url(../src/img/1001398452_x16_drawing.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:cover;
+  background-position: center;
   margin: 0;
   padding: 25px;
   width: 1200px;
@@ -53,4 +54,37 @@ button:hover{
 h2{
   color:white;
   font-size: 3rem;
+}
+/* Inicio */
+.Badb{
+  background-color: rgb(12, 12, 12, 0.9);
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(12, 12, 12);
+  color: white;
+  
+}
+
+nav input {
+  padding: 5px;
+}
+
+.content-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.content-item {
+  margin: 10px;
+  text-align: center;
+}
+
+.content-item img {
+  width: 150px;
+  height: auto;
 }

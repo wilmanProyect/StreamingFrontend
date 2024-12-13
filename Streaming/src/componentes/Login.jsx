@@ -38,7 +38,7 @@ const Login = () => {
 
       // Almacena el token en el localStorage o en el estado global
       localStorage.setItem('token', data.token); // Almacena el token
-      navigate('/dashboard'); // Redirige a otra página después de iniciar sesión
+      navigate('/inicio'); // Redirige a otra página después de iniciar sesión
     } catch (error) {
       setError(error.message); // Usa setError para mostrar el mensaje de error
     }
@@ -53,7 +53,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div >
       <h2>Iniciar Sesión</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>} {/* Muestra el mensaje de error */}
       <form onSubmit={handleLogin} className="formulario">
