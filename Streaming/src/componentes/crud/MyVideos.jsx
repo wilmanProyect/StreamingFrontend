@@ -8,9 +8,10 @@ const MyVideos = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        console.log('ID del creador:', id);
         const fetchVideos = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/creator/${id}/content`, {
+                const response = await fetch(`http://localhost:3000/content/creator/${id}/content`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

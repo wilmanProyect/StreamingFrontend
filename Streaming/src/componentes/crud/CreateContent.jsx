@@ -15,14 +15,22 @@ const CreateContent = () => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-
+    
         const formData = new FormData();
         formData.append('titulo', titulo);
         formData.append('descripcion', descripcion);
         formData.append('categorias', categorias);
         formData.append('clasificacion', clasificacion);
         formData.append('portada', portada);
-
+    
+        console.log('Datos enviados:', {
+            titulo,
+            descripcion,
+            categorias,
+            clasificacion,
+            portada,
+        });
+    
         try {
             const response = await fetch('http://localhost:3000/content/series', {
                 method: 'POST',
@@ -31,12 +39,17 @@ const CreateContent = () => {
                 },
                 body: formData
             });
-
+    
+            console.log('Estado de la respuesta:', response.status);
             if (!response.ok) {
+                const errorData = await response.text(); // Capturar más detalles del error
+                console.error('Error del servidor:', errorData);
                 throw new Error('Error al crear el contenido');
             }
-
+    
             const data = await response.json();
+            console.log('Respuesta del servidor:', data);
+    
             alert(data.message); // Mostrar mensaje de éxito
             // Limpiar el formulario
             setTitulo('');
@@ -46,7 +59,7 @@ const CreateContent = () => {
             setPortada(null);
             // Redirigir a AddEpisode, pasando el ID del contenido creado
             navigate(`/add-episode/${data.episodeId}`); // Asegúrate de que data.episodeId contenga el ID correcto
-
+    
         } catch (error) {
             console.error('Error creating content:', error);
             setError('Error al crear el contenido');
@@ -54,6 +67,7 @@ const CreateContent = () => {
             setLoading(false);
         }
     };
+    
 
     return (
         <div>

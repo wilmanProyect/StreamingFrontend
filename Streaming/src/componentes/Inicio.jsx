@@ -45,8 +45,8 @@ const StreamingApp = () => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` // Incluir el token en el encabezado
-                }
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
             });
             if (!response.ok) {
                 throw new Error('Error al obtener las películas');
@@ -62,21 +62,27 @@ const StreamingApp = () => {
     };
 
     useEffect(() => {
-        fetchAllSeries();
-        fetchAllMovies();
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login'); // Redirigir al login si no hay token
+        } else {
+            fetchAllSeries();
+            // fetchAllMovies();
+        }
     }, []);
 
     const handleSearch = async (e) => {
         const term = e.target.value;
         setSearchTerm(term);
-
+        setError(null); // Limpiar errores al iniciar una búsqueda
+    
         if (term) {
             try {
-                const response = await fetch(`http://localhost:3000/content/series?titulo=${term}`, {
+                const response = await fetch(`http://localhost:3000/content/series/title?titulo=${term}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}` // Incluir el token en el encabezado
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
                 });
                 if (!response.ok) {
@@ -89,7 +95,7 @@ const StreamingApp = () => {
                 setError('No se encontraron series con ese título');
             }
         } else {
-            fetchAllSeries();
+            fetchAllSeries(); // Volver a cargar todas las series si el campo de búsqueda está vacío
         }
     };
 
