@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Subscribe from './Subscribe';
+import CreateContent from './crud/CreateContent'; // Importar el componente para crear contenido
 
 const UserProfile = () => {
     const [user, setUser ] = useState(null);
@@ -45,11 +46,36 @@ const UserProfile = () => {
             <p><strong>ID:</strong> {user.id}</p>
             <p><strong>Nombre:</strong> {user.nombre}</p>
             <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Estado:</strong> {user.estado}</p>
-            <p><strong>Rol:</strong> {user.rol}</p>
-            <p><strong>Premium hasta:</strong> {user.premiumExpiresAt ? new Date(user.premiumExpiresAt).toLocaleDateString() : 'No es premium'}</p>
 
-            {user.estado !== 'premium' && <Subscribe userId={user.id} />}
+            {/* Ocultar información de Premium y Estado si es creador o admin */}
+            {user.rol !== 'creator' && user.rol !== 'admin' && (
+                <>
+                    <p><strong>Estado:</strong> {user.estado}</p>
+                    <p><strong>Premium hasta:</strong> {user.premiumExpiresAt ? new Date(user.premiumExpiresAt).toLocaleDateString() : 'No es premium'}</p>
+                </>
+            )}
+
+            {/* Mostrar el componente de suscripción solo si el usuario no es creador ni admin */}
+            {user.rol !== 'creator' && user.rol !== 'admin' && user.estado !== 'premium' && (
+                <Subscribe userId={user.id} />
+            )}
+
+            {/* Mostrar botones para creadores */}
+            {user.rol === 'creator' && (
+                <div>
+                    <h2>Opciones de Creador</h2>
+                    <button onClick={() => navigate('/create-content')}>Crear Contenido</button>
+                    <button onClick={() => navigate(`/my-videos/${user.id}`)}>Mis Videos</button>
+                </div>
+            )}
+
+            {/* Mostrar el componente para crear contenido si el usuario es un creador o admin */}
+            {(user.rol === 'creator' || user.rol === 'admin') && (
+                <div>
+                    <h2>Crear Nueva Serie o Película</h2>
+                    <CreateContent />
+                </div>
+            )}
         </div>
     );
 };
